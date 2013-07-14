@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="btn_padding">10dip</dimen>
+    <dimen name="square_view_padding">10px</dimen>
+</resources>

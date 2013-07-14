@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@color/black"
+    android:orientation="vertical"
+    android:padding="@dimen/btn_padding" >
+
+    <TextView
+        android:id="@+id/your_score_notif"
+        android:layout_width="fill_parent"
+        android:layout_height="20dip"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:text="@string/your_score_notif"
+        android:textColor="@color/white"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/game_over_score"
+        android:layout_width="fill_parent"
+        android:layout_height="100dip"
+        android:layout_weight="2"
+        android:gravity="center"
+        android:textColor="@color/white"
+        android:textSize="100sp" />
+
+    <Button
+        android:id="@+id/replay"
+        android:layout_width="fill_parent"
+        android:layout_height="48dip"
+        android:layout_weight="1"
+        android:background="@color/metro_green"
+        android:onClick="buttonPressed"
+        android:padding="@dimen/btn_padding"
+        android:text="@string/replay_button"
+        android:textColor="@color/white" />
+
+    <Button
+        android:id="@+id/highscore"
+        android:layout_width="fill_parent"
+        android:layout_height="48dip"
+        android:layout_weight="1"
+        
+        android:layout_marginTop="5dip"
+        android:layout_marginBottom="5dip"
+        
+        android:background="@color/metro_green"
+        android:onClick="buttonPressed"
+        android:padding="@dimen/btn_padding"
+        android:text="@string/gameover_highscore_button"
+        android:textColor="@color/white" />
+
+    <Button
+        android:id="@+id/home"
+        android:layout_width="fill_parent"
+        android:layout_height="48dip"
+        android:layout_weight="1"
+        android:background="@color/metro_green"
+        android:onClick="buttonPressed"
+        android:padding="@dimen/btn_padding"
+        android:text="@string/home_button"
+        android:textColor="@color/white" />
+
+</LinearLayout>

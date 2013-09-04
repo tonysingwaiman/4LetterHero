@@ -2,23 +2,29 @@
 <resources>
     <color name="white">#FFFFFF</color>
     <color name="black">#000000</color>
+    <color name="holo_white">#f3f3f3</color>
+    <color name="holo_grey">#ddd</color>
     <color name="metro_green">#9ACD32</color>
+    <color name="metro_green2">#a0f652</color>
+    <color name="dark_green">#4da100</color>
+    <color name="dark_green_pressed">#2f6300</color>
+        
     
-    <string name="app_name">4LetterHero</string>
+    <string name="app_name">4 Letter Hero</string>
     <string name="menu_settings">Settings</string>
     <string name="letter_placeholder"></string>
     <string name="score_value"></string>
-    <string name="your_score_notif">Your Score :</string>
+    <string name="your_score_notif">YOUR SCORE:</string>
     <string name="cancel">Cancel</string>
     
    
-    <string name="replay_button">Replay</string>
-    <string name="gameover_highscore_button">Submit Your Score</string>
-    <string name="home_button">Home</string>
+    <string name="replay_button">REPLAY</string>
+    <string name="gameover_highscore_button">SUBMIT SCORE</string>
+    <string name="home_button">HOME</string>
  
-    <string name="play_button">Play</string>
-    <string name="instr_button">Instructions</string>
-	<string name="home_highscore_button">The Current 4LetterHero</string>
+    <string name="play_button">PLAY</string>
+    <string name="home_highscore_button">THE HERO</string>
+    <string name="instr_button">INSTRUCTIONS</string>
 	
 	
 	<string name="highscore_confirmation">Please enter a name:</string>
@@ -31,7 +37,10 @@
     <string name="b_button">B</string>
     <string name="c_button">C</string>
     <string name="d_button">D</string>
+    <string name="pause_title">Current Game is Paused</string>
     
-    <string name="placeholder">Main Image Goes Here</string>
+    
+    <string name="placeholder">4 Letter Hero</string>
+    <string name="desc">Logo</string>
 
 </resources>

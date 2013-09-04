@@ -3,6 +3,8 @@ package com.letterhero.android;
 import java.util.Random;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -19,6 +21,7 @@ public class FourLetterHero extends Activity {
 	private int MAX_AMOUNT_OF_FAILS = 3000;
 	private int LETTERS_PER_LEVEL = 11;
 	private int CORRECT_LETTER_TIME_BONUS = 0;
+	private boolean FROM_BACKGROUND_PAUSED = false;
 
 	private int CDGameLength;
 	private int CDTickInterval = 2000;
@@ -27,23 +30,25 @@ public class FourLetterHero extends Activity {
 	private int score = 0;
 	private int failedAttempts = 0;
 
-	private SquareView display_letter;
 	private CountDownTimerWithPause cdTimer = null;
+
+	private TextView displayedScore;
+	private SquareView displayedLetter;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.game_display);
-		display_letter = (SquareView) findViewById(R.id.letter);
+		displayedScore = (TextView) findViewById(R.id.score);
+		displayedLetter = (SquareView) findViewById(R.id.letter);
 
 		Intent continuedGameIntent = getIntent();
 
 		if (continuedGameIntent.hasExtra(GameOver.CONTINUE_GAME)) {
 			score = Integer.parseInt(continuedGameIntent
 					.getStringExtra(GameOver.CONTINUE_GAME));
-			
-			TextView score_value = (TextView) findViewById(R.id.score);
-			score_value.setText(Integer.toString(score));
+
+			displayedScore.setText(Integer.toString(score));
 
 			GAME_DIFFICULTY = continuedGameIntent.getIntExtra(
 					GameOver.INCREASE_DIFFICULTY, 1);
@@ -94,9 +99,8 @@ public class FourLetterHero extends Activity {
 		CDTickInterval = 2000;
 		CDGameLength = CDTickInterval * LETTERS_PER_LEVEL;
 		score = 0;
-		
-		TextView score_value = (TextView) findViewById(R.id.score);
-		score_value.setText(Integer.toString(score));
+
+		displayedScore.setText(Integer.toString(score));
 	}
 
 	public void startGamePlay() {
@@ -106,22 +110,25 @@ public class FourLetterHero extends Activity {
 			public void onTick(long millisUntilFinished) {
 				CORRECT_LETTER_TIME_BONUS += 15;
 				buttonState(true);
-				display_letter.setTextColor(Color.BLACK);
+				displayedLetter.setTextColor(Color.BLACK);
 				letter = generateLetter();
-				display_letter.setText(String.valueOf(letter));
+
+				displayedLetter.setText(String.valueOf(letter));
 			}
 
 			public void onFinish() {
 				buttonState(false);
 				Intent onGameFinish_Intent = new Intent();
+
 				onGameFinish_Intent.setClassName("com.letterhero.android",
 						"com.letterhero.android.GameOver");
 
-				String player_score = ((TextView) findViewById(R.id.score))
-						.getText().toString();
+				String player_score = displayedScore.getText().toString();
+
 				onGameFinish_Intent.putExtra(EXTRA_MESSAGE, player_score);
 				onGameFinish_Intent.putExtra(EXTRA_LEVEL, true);
-				onGameFinish_Intent.putExtra(EXTRA_GAME_DIFFICULTY, GAME_DIFFICULTY);
+				onGameFinish_Intent.putExtra(EXTRA_GAME_DIFFICULTY,
+						GAME_DIFFICULTY);
 
 				startActivity(onGameFinish_Intent);
 			}
@@ -137,20 +144,17 @@ public class FourLetterHero extends Activity {
 
 	public void checkEntry(char user_letter) {
 		buttonState(false);
-		TextView scoreView = (TextView) findViewById(R.id.score);
-		
 		if (user_letter == letter) {
-			
+
 			score += (100 + ((2 * CORRECT_LETTER_TIME_BONUS) + ((GAME_DIFFICULTY - 1) * 2)));
-			scoreView.setText(Integer.toString(score));
-			display_letter.setTextColor(Color.GREEN);
+			displayedScore.setText(Integer.toString(score));
+			displayedLetter.setTextColor(Color.GREEN);
 
 		} else {
 			failedAttempts++;
 			score -= ((GAME_DIFFICULTY - 1) + 100);
-			scoreView.setText(Integer.toString(score));
-			display_letter.setTextColor(Color.RED);
-			
+			displayedScore.setText(Integer.toString(score));
+			displayedLetter.setTextColor(Color.RED);
 
 			if (failedAttempts == MAX_AMOUNT_OF_FAILS) {
 				buttonState(false);
@@ -158,8 +162,7 @@ public class FourLetterHero extends Activity {
 				onGameLost_Intent.setClassName("com.letterhero.android",
 						"com.letterhero.android.GameOver");
 
-				String player_score = ((TextView) findViewById(R.id.score))
-						.getText().toString();
+				String player_score = displayedScore.getText().toString();
 				onGameLost_Intent.putExtra(EXTRA_MESSAGE, player_score);
 				onGameLost_Intent.putExtra(EXTRA_LEVEL, false);
 
@@ -172,12 +175,24 @@ public class FourLetterHero extends Activity {
 		super.onPause();
 		buttonState(false);
 		cdTimer.pause();
+		FROM_BACKGROUND_PAUSED = true;
 	}
 
 	public void onResume() {
 		super.onResume();
-		buttonState(true);
-		cdTimer.resume();
+		if (FROM_BACKGROUND_PAUSED) {
+			new AlertDialog.Builder(this)
+					.setTitle(R.string.pause_title)
+					.setPositiveButton("Resume",
+							new DialogInterface.OnClickListener() {
+								public void onClick(DialogInterface dialog,
+										int which) {
+									FROM_BACKGROUND_PAUSED = false;
+									buttonState(true);
+									cdTimer.resume();
+								}
+							}).show();
+		}
 	}
 
 }

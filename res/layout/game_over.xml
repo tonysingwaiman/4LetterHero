@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="@color/black"
+    android:background="@color/holo_white"
     android:orientation="vertical"
     android:padding="@dimen/btn_padding" >
 
@@ -13,7 +13,6 @@
         android:layout_weight="1"
         android:gravity="center"
         android:text="@string/your_score_notif"
-        android:textColor="@color/white"
         android:textSize="20sp" />
 
     <TextView
@@ -22,44 +21,51 @@
         android:layout_height="100dip"
         android:layout_weight="2"
         android:gravity="center"
-        android:textColor="@color/white"
         android:textSize="100sp" />
 
     <Button
         android:id="@+id/replay"
         android:layout_width="fill_parent"
-        android:layout_height="48dip"
+        android:layout_height="40dip"
+        android:layout_marginBottom="20dip"
+        android:layout_marginLeft="30dip"
+        android:layout_marginRight="30dip"
         android:layout_weight="1"
-        android:background="@color/metro_green"
+        android:background="@xml/selector_button_page_nav"
         android:onClick="buttonPressed"
-        android:padding="@dimen/btn_padding"
         android:text="@string/replay_button"
-        android:textColor="@color/white" />
+        android:textColor="@color/metro_green2"
+        android:textSize="20sp"
+        android:textStyle="bold" />
 
     <Button
         android:id="@+id/highscore"
         android:layout_width="fill_parent"
-        android:layout_height="48dip"
+        android:layout_height="40dip"
+        android:layout_marginBottom="20dip"
+        android:layout_marginLeft="30dip"
+        android:layout_marginRight="30dip"
         android:layout_weight="1"
-        
-        android:layout_marginTop="5dip"
-        android:layout_marginBottom="5dip"
-        
-        android:background="@color/metro_green"
+        android:background="@xml/selector_button_page_nav"
         android:onClick="buttonPressed"
-        android:padding="@dimen/btn_padding"
         android:text="@string/gameover_highscore_button"
-        android:textColor="@color/white" />
+        android:textColor="@color/metro_green2"
+        android:textSize="20sp"
+        android:textStyle="bold" />
 
     <Button
         android:id="@+id/home"
         android:layout_width="fill_parent"
-        android:layout_height="48dip"
+        android:layout_height="40dip"
+        android:layout_marginBottom="20dip"
+        android:layout_marginLeft="30dip"
+        android:layout_marginRight="30dip"
         android:layout_weight="1"
-        android:background="@color/metro_green"
+        android:background="@xml/selector_button_page_nav"
         android:onClick="buttonPressed"
-        android:padding="@dimen/btn_padding"
         android:text="@string/home_button"
-        android:textColor="@color/white" />
+        android:textColor="@color/metro_green2"
+        android:textSize="20sp"
+        android:textStyle="bold" />
 
 </LinearLayout>

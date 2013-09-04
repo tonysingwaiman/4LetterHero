@@ -1,6 +1,7 @@
 package com.letterhero.android;
 
 import android.annotation.SuppressLint;
+import android.app.ActionBar;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -8,6 +9,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
+import android.text.InputFilter;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -24,16 +26,23 @@ public class GameOver extends Activity {
 	private int CURRENT_DIFFICULTY;
 	private boolean SCORE_SUBMITTED = false;
 
+	private TextView displayedScore;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.game_over);
+		displayedScore = (TextView) findViewById(R.id.game_over_score);
 
+		ActionBar actionBar = getActionBar();
+		actionBar.setTitle("Game Over");
+
+		
+		
 		Intent intentFromGame = getIntent();
 		String score_value = intentFromGame
 				.getStringExtra(FourLetterHero.EXTRA_MESSAGE);
-		TextView displayed_score = (TextView) findViewById(R.id.game_over_score);
-		displayed_score.setText(score_value);
+		displayedScore.setText(score_value);
 
 		if (intentFromGame.hasExtra(FourLetterHero.EXTRA_LEVEL)) {
 			passedLevel = getIntent().getExtras().getBoolean(
@@ -41,7 +50,7 @@ public class GameOver extends Activity {
 
 			if (passedLevel) {
 				Button continueButton = (Button) findViewById(R.id.replay);
-				continueButton.setText("Continue");
+				continueButton.setText("CONTINUE");
 			}
 
 			CURRENT_DIFFICULTY = intentFromGame.getIntExtra(
@@ -58,8 +67,7 @@ public class GameOver extends Activity {
 						| Intent.FLAG_ACTIVITY_CLEAR_TOP);
 
 				if (passedLevel) {
-					String player_score = ((TextView) findViewById(R.id.game_over_score))
-							.getText().toString();
+					String player_score = displayedScore.getText().toString();
 
 					intent.putExtra(CONTINUE_GAME, player_score);
 					intent.putExtra(INCREASE_DIFFICULTY,
@@ -74,9 +82,8 @@ public class GameOver extends Activity {
 			break;
 		case R.id.highscore:
 			if (SCORE_SUBMITTED == false) {
-				int submittedScore = Integer
-						.parseInt(((TextView) findViewById(R.id.game_over_score))
-								.getText().toString());
+				int submittedScore = Integer.parseInt(displayedScore.getText()
+						.toString());
 				showHighscoreConfirmation(submittedScore);
 			} else {
 				scoreAlreadySubmittedToast();
@@ -94,6 +101,8 @@ public class GameOver extends Activity {
 	public void showHighscoreConfirmation(final int score) {
 		if (score > 0) {
 			final EditText input = new EditText(this);
+			input.setFilters(new InputFilter[] { new InputFilter.LengthFilter(
+					20) });
 
 			new AlertDialog.Builder(this)
 					.setTitle("Confirm Highscore")
@@ -145,6 +154,8 @@ public class GameOver extends Activity {
 			editor.putInt("Highscore", currentScore);
 			editor.commit();
 
+			HighScoreDialogFragment congrats = new HighScoreDialogFragment();
+			congrats.show(getFragmentManager(), "HIGHSCORE_SUCCESS");
 		} else {
 			if (currentScore > previousHScore) {
 
@@ -155,7 +166,6 @@ public class GameOver extends Activity {
 				HighScoreDialogFragment congrats = new HighScoreDialogFragment();
 				congrats.show(getFragmentManager(), "HIGHSCORE_SUCCESS");
 
-				SCORE_SUBMITTED = true;
 			} else {
 				Toast.makeText(
 						getApplication(),
@@ -163,9 +173,11 @@ public class GameOver extends Activity {
 						Toast.LENGTH_LONG).show();
 			}
 		}
+
+		SCORE_SUBMITTED = true;
 	}
-	
-	public void scoreAlreadySubmittedToast(){
+
+	public void scoreAlreadySubmittedToast() {
 		Toast.makeText(
 				getApplication(),
 				"Your score has already been submitted. Play another game to break the highscore again.",

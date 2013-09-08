@@ -6,7 +6,7 @@
 
     <uses-sdk
         android:minSdkVersion="8"
-        android:targetSdkVersion="17" />
+        android:targetSdkVersion="18" />
 
     <application
         android:allowBackup="true"
@@ -27,6 +27,8 @@
             android:screenOrientation="portrait" >
         </activity>
         <activity android:name=".GameOver" >
+        </activity>
+        <activity android:name=".Instructions" >
         </activity>
     </application>
 

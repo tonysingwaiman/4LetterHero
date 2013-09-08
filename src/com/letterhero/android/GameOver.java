@@ -19,57 +19,59 @@ import android.widget.Toast;
 @SuppressLint("NewApi")
 public class GameOver extends Activity {
 	public final static String CONTINUE_GAME = "com.letterhero.android.FourLetterHero";
-	public final static String INCREASE_DIFFICULTY = "HARDER";
-	public final static String HIGHSCORE_KEY = "Highscore_Key";
+	public final static String INCREASE_DIFFICULTY = "GameOver.Increase_Difficulty";
+	public final static String HIGHSCORE_KEY = "GameOver.Highscore_Key";
+	public final static String EXTRA_HERO = "GameOver.Hero";
 
 	private boolean passedLevel = false;
-	private int CURRENT_DIFFICULTY;
+	private int CURRENT_DIFFICULTY = -1;
 	private boolean SCORE_SUBMITTED = false;
 
 	private TextView displayedScore;
+	private Button continueButton;
+	private Hero hero;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.game_over);
 		displayedScore = (TextView) findViewById(R.id.game_over_score);
+		continueButton = (Button) findViewById(R.id.replay);
 
 		ActionBar actionBar = getActionBar();
 		actionBar.setTitle("Game Over");
 
-		
-		
 		Intent intentFromGame = getIntent();
-		String score_value = intentFromGame
-				.getStringExtra(FourLetterHero.EXTRA_MESSAGE);
-		displayedScore.setText(score_value);
 
-		if (intentFromGame.hasExtra(FourLetterHero.EXTRA_LEVEL)) {
-			passedLevel = getIntent().getExtras().getBoolean(
-					FourLetterHero.EXTRA_LEVEL);
+		hero = intentFromGame.getParcelableExtra(FourLetterHero.EXTRA_HERO);
 
-			if (passedLevel) {
-				Button continueButton = (Button) findViewById(R.id.replay);
-				continueButton.setText("CONTINUE");
-			}
+		displayedScore.setText(Integer.toString(hero.getScore()));
 
+		passedLevel = intentFromGame.getBooleanExtra(
+				FourLetterHero.EXTRA_LEVEL, false);
+
+		if (passedLevel) {
+			continueButton.setText("CONTINUE");
+		}
+
+		if (intentFromGame.hasExtra(FourLetterHero.EXTRA_GAME_DIFFICULTY)) {
 			CURRENT_DIFFICULTY = intentFromGame.getIntExtra(
 					FourLetterHero.EXTRA_GAME_DIFFICULTY, 1);
 		}
+
 	}
 
 	public void buttonPressed(View v) {
 		switch (v.getId()) {
 		case R.id.replay:
-			if (SCORE_SUBMITTED == false) {
+			if (!SCORE_SUBMITTED) {
 				Intent intent = new Intent(v.getContext(), FourLetterHero.class);
 				intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK
 						| Intent.FLAG_ACTIVITY_CLEAR_TOP);
 
 				if (passedLevel) {
-					String player_score = displayedScore.getText().toString();
-
-					intent.putExtra(CONTINUE_GAME, player_score);
+					intent.putExtra(EXTRA_HERO, hero);
+					intent.putExtra(CONTINUE_GAME, true);
 					intent.putExtra(INCREASE_DIFFICULTY,
 							(int) (CURRENT_DIFFICULTY + 10));
 				}
@@ -78,7 +80,6 @@ public class GameOver extends Activity {
 			} else {
 				scoreAlreadySubmittedToast();
 			}
-
 			break;
 		case R.id.highscore:
 			if (SCORE_SUBMITTED == false) {

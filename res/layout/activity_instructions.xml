@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent" >
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/header_objective"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dip"
+            android:layout_marginTop="10dip"
+            android:gravity="left"
+            android:text="@string/header_objective"
+            android:textSize="30sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/obj_desc"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dip"
+            android:gravity="left"
+            android:paddingRight="10dip"
+            android:text="@string/objective_desc" />
+
+        <ImageView
+            android:id="@+id/gameboard"
+            android:layout_width="fill_parent"
+            android:layout_height="0dip"
+            android:layout_weight="0.83"
+            android:adjustViewBounds="true"
+            android:contentDescription="@string/desc"
+            android:scaleType="centerInside"
+            android:src="@drawable/instr_gameboard" />
+
+        <TextView
+            android:id="@+id/timelimit_desc"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="15dip"
+            android:layout_marginLeft="15dip"
+            android:gravity="left"
+            android:paddingRight="10dip"
+            android:text="@string/timelimit_desc" />
+
+        <TextView
+            android:id="@+id/lives_desc"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="15dip"
+            android:layout_marginLeft="15dip"
+            android:gravity="left"
+            android:paddingRight="10dip"
+            android:text="@string/lives_desc" />
+
+        <TextView
+            android:id="@+id/header_levels"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dip"
+            android:gravity="left"
+            android:text="@string/header_levels"
+            android:textSize="30sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/levels_desc"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="15dip"
+            android:layout_marginLeft="15dip"
+            android:gravity="left"
+            android:paddingRight="10dip"
+            android:text="@string/levels_desc" />
+
+        <TextView
+            android:id="@+id/header_hero"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dip"
+            android:gravity="left"
+            android:text="@string/header_hero"
+            android:textSize="30sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/hero_desc"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="15dip"
+            android:layout_marginLeft="15dip"
+            android:gravity="left"
+            android:paddingRight="10dip"
+            android:text="@string/hero_desc" />
+
+        <Button
+            android:id="@+id/done_button"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dip"
+            android:layout_marginLeft="30dip"
+            android:layout_marginRight="30dip"
+            android:background="@xml/selector_button_page_nav"
+            android:text="@string/instr_done"
+            android:textColor="@color/metro_green2"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+</ScrollView>

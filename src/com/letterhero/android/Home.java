@@ -5,7 +5,6 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
@@ -29,11 +28,15 @@ public class Home extends Activity {
 			showHighScoreDialog();
 			break;
 		case R.id.instructionButton:
-			// TODO: Add an instruction screen; for now clears preferences
-			SharedPreferences sp = this.getSharedPreferences("Highest_score",
-					MODE_PRIVATE);
-			Editor editor = sp.edit();
-			editor.remove("Name").remove("Highscore").commit();
+	
+//			SharedPreferences sp = this.getSharedPreferences("Highest_score",
+//					MODE_PRIVATE);
+//			Editor editor = sp.edit();
+//			editor.remove("Name").remove("Highscore").commit();
+			
+			
+			Intent intent1 = new Intent(v.getContext(), Instructions.class);
+			startActivity(intent1);
 
 			break;
 		}

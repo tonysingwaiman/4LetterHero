@@ -8,7 +8,7 @@
     tools:context=".Home" >
 
     <ImageView
-        android:id="@+id/kik_banner"
+        android:id="@+id/main_banner"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"

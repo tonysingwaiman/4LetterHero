@@ -42,5 +42,17 @@
     
     <string name="placeholder">4 Letter Hero</string>
     <string name="desc">Logo</string>
+    
+    <string name="header_objective">Objective</string>
+    <string name="objective_desc">Tap the corresponding button for the letter that appears on the gameboard to earn points.</string>
+    <string name="timelimit_desc">But be quick! The letter will change after a certain time limit and you will not get the points.</string>
+    <string name="lives_desc">If you tap the wrong button you will lose a life and some points!</string>
+    
+    <string name="header_levels">Levels</string>
+    <string name="levels_desc">Upon clearing each level (10 letters per level) you will be allowed to continue to the next level. Each level, the letter changes faster but you will earn more points!</string>
+    
+    <string name="header_hero">The Hero</string>
+    <string name="hero_desc">You can submit your score after a level. If you have the highest score you can become the 4 Letter Hero!</string>
+    <string name="instr_done">GOT IT!</string>
 
 </resources>

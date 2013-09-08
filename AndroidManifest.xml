@@ -24,6 +24,7 @@
         </activity>
         <activity
             android:name=".FourLetterHero"
+            android:noHistory="true"
             android:screenOrientation="portrait" >
         </activity>
         <activity android:name=".GameOver" >

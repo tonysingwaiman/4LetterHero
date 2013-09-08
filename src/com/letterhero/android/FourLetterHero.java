@@ -168,7 +168,6 @@ public class FourLetterHero extends Activity {
 				onGameLost_Intent.setClassName("com.letterhero.android",
 						"com.letterhero.android.GameOver");
 
-
 				onGameLost_Intent.putExtra(EXTRA_HERO, hero);
 				onGameLost_Intent.putExtra(EXTRA_LEVEL, false);
 

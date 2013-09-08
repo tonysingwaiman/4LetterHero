@@ -28,16 +28,8 @@ public class Home extends Activity {
 			showHighScoreDialog();
 			break;
 		case R.id.instructionButton:
-	
-//			SharedPreferences sp = this.getSharedPreferences("Highest_score",
-//					MODE_PRIVATE);
-//			Editor editor = sp.edit();
-//			editor.remove("Name").remove("Highscore").commit();
-			
-			
 			Intent intent1 = new Intent(v.getContext(), Instructions.class);
 			startActivity(intent1);
-
 			break;
 		}
 	}
@@ -50,17 +42,14 @@ public class Home extends Activity {
 	}
 
 	public void showHighScoreDialog() {
-		SharedPreferences sp = this.getSharedPreferences("Highest_score",
-				MODE_PRIVATE);
+		SharedPreferences sp = this.getSharedPreferences(GameConsts.PREF_NAME, MODE_PRIVATE);
 
 		String currentHighscoreName = sp.getString("Name", null);
 		int currentHighscore = sp.getInt("Highscore", 0);
 
 		if (currentHighscoreName != null && currentHighscore > 0) {
 			new AlertDialog.Builder(this)
-					.setTitle(
-							"All hail the current hero : "
-									+ currentHighscoreName)
+					.setTitle("All hail the current hero : " + currentHighscoreName)
 					.setMessage("Their top score : " + currentHighscore)
 					.setPositiveButton("OK",
 							new DialogInterface.OnClickListener() {
@@ -70,8 +59,7 @@ public class Home extends Activity {
 								}
 							}).show();
 		} else {
-			Toast.makeText(getApplication(), "No current hero",
-					Toast.LENGTH_SHORT).show();
+			Toast.makeText(getApplication(), "No current hero", Toast.LENGTH_SHORT).show();
 		}
 
 	}

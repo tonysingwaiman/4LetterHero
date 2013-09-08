@@ -83,9 +83,7 @@ public class GameOver extends Activity {
 			break;
 		case R.id.highscore:
 			if (SCORE_SUBMITTED == false) {
-				int submittedScore = Integer.parseInt(displayedScore.getText()
-						.toString());
-				showHighscoreConfirmation(submittedScore);
+				showHighscoreConfirmation(hero.getScore());
 			} else {
 				scoreAlreadySubmittedToast();
 			}
@@ -142,7 +140,7 @@ public class GameOver extends Activity {
 	}
 
 	public void submitHighscore(String currentName, int currentScore) {
-		SharedPreferences sp = this.getSharedPreferences("Highest_score",
+		SharedPreferences sp = this.getSharedPreferences(GameConsts.PREF_NAME,
 				MODE_PRIVATE);
 		Editor editor = sp.edit();
 

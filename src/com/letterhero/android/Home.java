@@ -44,8 +44,8 @@ public class Home extends Activity {
 	public void showHighScoreDialog() {
 		SharedPreferences sp = this.getSharedPreferences(GameConsts.PREF_NAME, MODE_PRIVATE);
 
-		String currentHighscoreName = sp.getString("Name", null);
-		int currentHighscore = sp.getInt("Highscore", 0);
+		String currentHighscoreName = sp.getString(GameConsts.PREF_USERNAME_KEY, null);
+		int currentHighscore = sp.getInt(GameConsts.PREF_HIGHSCORE_KEY, 0);
 
 		if (currentHighscoreName != null && currentHighscore > 0) {
 			new AlertDialog.Builder(this)
@@ -55,7 +55,7 @@ public class Home extends Activity {
 							new DialogInterface.OnClickListener() {
 								public void onClick(DialogInterface dialog,
 										int which) {
-
+									return;
 								}
 							}).show();
 		} else {

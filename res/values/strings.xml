@@ -32,6 +32,7 @@
 	<string name="highscore_toast">Cannot submit such a low score</string>
 	<string name="highscore_congrats_title">Congratulations!</string>
 	<string name="highscore_congrats_text">You are now the 4LetterHero!</string>
+	<string name="highscore_enter_proper_name">Please enter a proper name.</string>
     
     <string name="a_button">A</string>
     <string name="b_button">B</string>
